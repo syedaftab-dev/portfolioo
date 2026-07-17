@@ -139,9 +139,9 @@
 
     .bg-text {
       position: absolute;
-      top: 14%;
+      top: 20%;
       left: 50%;
-      transform: translateX(-50%) scaleY(1.55);
+      transform: translateX(-50%) scaleY(2);
       width: max-content;
       text-align: center;
       font-family: 'Anton', sans-serif;
@@ -261,7 +261,7 @@
     /* name/bio block, overlapping bg word on the left */
     .hero-content {
       position: absolute;
-      left: 155px;
+      left: 200px;
       top: 42%;
       transform: translateY(-28%);
       z-index: 4;
@@ -344,10 +344,13 @@
     }
 
     @keyframes starBlink {
-      0%, 100% {
+
+      0%,
+      100% {
         opacity: 0.3;
         transform: scale(0.85);
       }
+
       50% {
         opacity: 1;
         transform: scale(1.15);
@@ -403,7 +406,7 @@
     /* availability, bottom-left corner */
     .avail {
       position: absolute;
-      left: 190px;
+      left: 240px;
       top: 70%;
       bottom: 24px;
       z-index: 4;
@@ -1145,65 +1148,122 @@
       }
     }
 
+    @media (min-width: 901px) and (max-width: 1600px) {
+      body {
+        zoom: 0.8;
+      }
+    }
+
+    /* ===== TABLET & MOBILE ( ≤ 900px ) ===== */
     @media(max-width:900px) {
+
+      /* Reset ALL hero children to normal flow */
+      .hero .bg-text,
+      .hero .bg-blur,
+      .hero .hero-topbar,
+      .hero .hero-photo,
+      .hero .hero-content,
+      .hero .float-note,
+      .hero .stats-col,
+      .hero .avail {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        animation: none !important;
+        opacity: 1 !important;
+        z-index: auto !important;
+      }
+
       .hero {
+        display: flex !important;
+        flex-direction: column !important;
         min-height: auto;
-        padding-bottom: 30px;
+        padding: 0 0 30px 0;
+        overflow: visible;
       }
 
       .bg-text {
-        position: static;
         font-size: 3rem;
-        opacity: .18;
-        text-align: left;
+        opacity: .18 !important;
+        text-align: center;
         white-space: normal;
-        padding: 16px 20px 0;
+        padding: 24px 20px 0;
         letter-spacing: -1px;
+        order: 1;
+      }
+
+      .bg-blur {
+        display: none !important;
       }
 
       .hero-topbar {
         padding: 24px 20px 0;
-      }
-
-      .hero-content {
-        position: static;
-        transform: none;
-        padding: 20px 20px 0;
-        max-width: none;
+        order: 0;
       }
 
       .hero-photo {
-        position: static;
-        left: auto;
-        transform: none;
-        width: calc(100% - 40px);
-        height: 280px;
-        margin: 24px auto 0;
-        -webkit-mask-image: none;
-        mask-image: none;
-        border-radius: 6px;
+        display: none !important;
+      }
+
+      .hero-photo .photo-label .profile {
+        width: 100%;
+      }
+
+      .hero-content {
+        padding: 24px 20px 0;
+        max-width: none;
+        order: 3;
+      }
+
+      .hero-content h1 {
+        transform: none !important;
+        font-size: clamp(2rem, 8vw, 3.2rem);
+        margin-bottom: 16px;
+      }
+
+      .hero-content .script {
+        font-size: 2.4rem;
+      }
+
+      .hero-content .role-line {
+        font-size: 1rem;
+      }
+
+      .hero-content p.bio {
+        font-size: .82rem;
+        max-width: none;
       }
 
       .float-note {
-        display: none;
+        display: none !important;
       }
 
       .stats-col {
-        position: static;
-        transform: none;
         flex-direction: row;
         flex-wrap: wrap;
         gap: 20px;
         padding: 24px 20px 0;
+        order: 4;
+      }
+
+      .stat .num {
+        font-size: 1.8rem;
       }
 
       .avail {
-        position: static;
         padding: 20px 20px 0;
+        order: 5;
       }
 
       .proj-grid {
         grid-template-columns: 1fr;
+      }
+
+      .proj-card {
+        min-height: 320px;
       }
 
       .triptych {
@@ -1216,12 +1276,31 @@
         border-bottom: 1px solid var(--line);
       }
 
+      .triptych>div {
+        padding: 40px 20px;
+      }
+
+      .skills-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
       .footer-grid {
         grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .footer-left h2 {
+        font-size: 1.8rem;
       }
 
       .container {
         padding: 0 20px;
+      }
+
+      .section-head {
+        flex-direction: column;
+        gap: 10px;
       }
 
       .experience {
@@ -1235,6 +1314,123 @@
 
       .experience h2 {
         margin-bottom: 24px;
+      }
+
+      .bottom-bar {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+    }
+
+    /* ===== SMALL PHONES ( ≤ 480px ) ===== */
+    @media(max-width:480px) {
+      .hero {
+        padding-bottom: 20px;
+      }
+
+      .bg-text {
+        font-size: 2.2rem;
+      }
+
+      .hero-content h1 {
+        transform: scaleY(1.3);
+        font-size: clamp(1.6rem, 9vw, 2.4rem);
+        margin-bottom: 0.8em;
+      }
+
+      .hero-content .script {
+        font-size: 1.8rem;
+      }
+
+      .hero-content .role-line {
+        font-size: .85rem;
+      }
+
+      .hero-content p.bio {
+        font-size: .75rem;
+      }
+
+      .hero-photo {
+        width: 75%;
+      }
+
+      .stats-col {
+        flex-direction: column;
+        gap: 16px;
+        padding: 20px 16px 0;
+      }
+
+      .stat {
+        gap: 16px;
+      }
+
+      .stat .num {
+        font-size: 1.5rem;
+      }
+
+      .avail {
+        font-size: .65rem;
+        padding: 16px 16px 0;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .projects {
+        padding: 50px 0;
+      }
+
+      .section-head h2 {
+        font-size: 1.4rem;
+      }
+
+      .proj-card {
+        min-height: 280px;
+      }
+
+      .proj-card .body {
+        padding: 16px;
+      }
+
+      .col-edu h2,
+      .col-process h2 {
+        font-size: 1.15rem;
+      }
+
+      .col-quote p.q {
+        font-size: 1.05rem;
+      }
+
+      .experience {
+        padding: 40px 0;
+      }
+
+      .exp-item {
+        padding: 18px;
+      }
+
+      .achieve-item {
+        padding: 16px;
+        gap: 12px;
+      }
+
+      .footer {
+        padding: 50px 0 30px;
+      }
+
+      .footer-left h2 {
+        font-size: 1.5rem;
+      }
+
+      .footer-avail {
+        font-size: .65rem;
+        padding: 8px 14px;
+      }
+
+      .contact-item {
+        font-size: .78rem;
       }
     }
 
@@ -1281,9 +1477,12 @@
     }
 
     @keyframes resumePulse {
-      0%, 100% {
+
+      0%,
+      100% {
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(230, 57, 70, 0.15);
       }
+
       50% {
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 28px rgba(230, 57, 70, 0.45);
       }
@@ -1297,6 +1496,7 @@
         height: 44px;
         padding: 0;
       }
+
       .resume-float .resume-icon {
         font-size: 1rem;
       }
@@ -1319,6 +1519,7 @@
         opacity: 0;
         transform: translateY(30px);
       }
+
       100% {
         opacity: 1;
         transform: translateY(0);
@@ -1374,10 +1575,12 @@
         transform: scale(0.95);
         box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.7);
       }
+
       70% {
         transform: scale(1);
         box-shadow: 0 0 0 6px rgba(243, 156, 18, 0);
       }
+
       100% {
         transform: scale(0.95);
         box-shadow: 0 0 0 0 rgba(243, 156, 18, 0);
@@ -1456,7 +1659,9 @@
             <div class="status-badge WIP"><span class="pulse-dot"></span> In Development</div>
             <h3>CortexAI</h3>
             <div class="sub">Multi-Agent AI Platform</div>
-            <p class="proj-desc">Multi-agent AI platform orchestrating autonomous workflows. Built with a MERN stack and Redis session/cache management, integrated LangChain and LangGraph for dynamic RAG, and deployed on AWS.</p>
+            <p class="proj-desc">Multi-agent AI platform orchestrating autonomous workflows. Built with a MERN stack and
+              Redis session/cache management, integrated LangChain and LangGraph for dynamic RAG, and deployed on AWS.
+            </p>
             <div class="proj-tech">
               <span class="tech-badge">MERN</span>
               <span class="tech-badge">AWS</span>
@@ -1478,7 +1683,8 @@
             <div class="num">02</div>
             <h3>Threadly</h3>
             <div class="sub">Full Stack Social Feed Platform</div>
-            <p class="proj-desc">Serverless social feed platform with algorithmic sorting. Achieved near-zero cold starts via Next.js 16 App Router and RSC. Shifted 80% data-fetching to server actions.</p>
+            <p class="proj-desc">Serverless social feed platform with algorithmic sorting. Achieved near-zero cold
+              starts via Next.js 16 App Router and RSC. Shifted 80% data-fetching to server actions.</p>
             <div class="proj-tech">
               <span class="tech-badge">Next.js 16</span>
               <span class="tech-badge">React 19</span>
@@ -1498,7 +1704,8 @@
             <div class="num">03</div>
             <h3>Sportz</h3>
             <div class="sub">Real Time Sports Dashboard</div>
-            <p class="proj-desc">Real time sports analytics platform with sub-second latency via WebSockets. Integrated Groq Llama 3.1 for AI commentary. Optimized DB query latency from 800ms to 150ms.</p>
+            <p class="proj-desc">Real time sports analytics platform with sub-second latency via WebSockets. Integrated
+              Groq Llama 3.1 for AI commentary. Optimized DB query latency from 800ms to 150ms.</p>
             <div class="proj-tech">
               <span class="tech-badge">React</span>
               <span class="tech-badge">Node.js</span>
@@ -1519,7 +1726,8 @@
             <div class="num">04</div>
             <h3>CredX</h3>
             <div class="sub">AI SaaS Spending Analytics</div>
-            <p class="proj-desc">SaaS spend auditing engine with Next.js App Router. AI-driven recommendations across 10+ pricing models. Automated email reports using Groq and Nodemailer.</p>
+            <p class="proj-desc">SaaS spend auditing engine with Next.js App Router. AI-driven recommendations across
+              10+ pricing models. Automated email reports using Groq and Nodemailer.</p>
             <div class="proj-tech">
               <span class="tech-badge">Next.js</span>
               <span class="tech-badge">TypeScript</span>
@@ -1539,7 +1747,9 @@
             <div class="num">05</div>
             <h3>AftaMeet</h3>
             <div class="sub">Full Stack Video Conferencing Platform</div>
-            <p class="proj-desc">Modern real time communication platform. Features high-quality audio/video calls (Stream SDK), WebSocket-based live chat with typing indicators, and secure cookie-based JWT authentication.</p>
+            <p class="proj-desc">Modern real time communication platform. Features high-quality audio/video calls
+              (Stream SDK), WebSocket-based live chat with typing indicators, and secure cookie-based JWT
+              authentication.</p>
             <div class="proj-tech">
               <span class="tech-badge">React 19</span>
               <span class="tech-badge">Node.js</span>
@@ -1561,7 +1771,8 @@
             <div class="num">06</div>
             <h3>SkinHealth AI</h3>
             <div class="sub">AI Skin Diagnosis & Clinic Portal</div>
-            <p class="proj-desc">Deep learning skin lesion classification platform. Built with PyTorch (timm) and FastAPI for real time diagnosis. Features client, doctor, and admin portals with a React frontend.</p>
+            <p class="proj-desc">Deep learning skin lesion classification platform. Built with PyTorch (timm) and
+              FastAPI for real time diagnosis. Features client, doctor, and admin portals with a React frontend.</p>
             <div class="proj-tech">
               <span class="tech-badge">React 19</span>
               <span class="tech-badge">FastAPI</span>
@@ -1748,8 +1959,7 @@
             <div class="ic">✉</div> <a href="mailto:syedaftab488@gmail.com">syedaftab488@gmail.com</a>
           </div>
           <div class="contact-item">
-            <div class="ic">⌂</div> <a href="https://github.com/syedaftab-dev"
-              target="_blank">github.com/syedaftab</a>
+            <div class="ic">⌂</div> <a href="https://github.com/syedaftab-dev" target="_blank">github.com/syedaftab</a>
           </div>
           <div class="contact-item">
             <div class="ic">in</div> <a href="https://www.linkedin.com/in/syed-aftab-797130345/"
@@ -1822,7 +2032,7 @@
         e.preventDefault();
         const hiddenCards = document.querySelectorAll('.proj-card.hidden-card');
         const isShowing = viewAllBtn.classList.contains('active');
-        
+
         hiddenCards.forEach(card => {
           if (isShowing) {
             card.classList.remove('show');
@@ -1830,7 +2040,7 @@
             card.classList.add('show');
           }
         });
-        
+
         if (isShowing) {
           viewAllBtn.classList.remove('active');
           viewAllBtn.innerText = 'View All Projects →';
@@ -1843,7 +2053,8 @@
   </script>
 
   <!-- FLOATING RESUME BUTTON -->
-  <a href="https://drive.google.com/file/d/1XcYTNmMPSGzkD-XZsC9eHrDfUmKvFnsd/view?usp=sharing" target="_blank" class="resume-float" id="resumeFloatingBtn" title="Resume">
+  <a href="https://drive.google.com/file/d/1XcYTNmMPSGzkD-XZsC9eHrDfUmKvFnsd/view?usp=sharing" target="_blank"
+    class="resume-float" id="resumeFloatingBtn" title="Resume">
     <span class="resume-icon">📄</span>
   </a>
 
