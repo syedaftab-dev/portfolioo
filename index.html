@@ -18,7 +18,8 @@
       --red: #ac0f16;
       --red-deep: #7a0e18;
       --text: #f2f2f2;
-      --muted: #8a8a8a;
+      --muted: #b3afaf;
+      /* --muted: #8a8a8a; */
       --line: #262626;
     }
 
@@ -1434,26 +1435,37 @@
       }
     }
 
-    /* ===== FLOATING RESUME BUTTON ===== */
-    .resume-float {
+    /* ===== FLOATING ACTION BUTTONS ===== */
+    .floating-actions {
       position: fixed;
       top: 30px;
       right: 30px;
       z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .resume-float,
+    .leetcode-float {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 52px;
       height: 52px;
       background: rgba(20, 20, 20, 0.85);
-      border: 1px solid var(--red);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border-radius: 50%;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .resume-float {
+      border: 1px solid var(--red);
       color: var(--text);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(230, 57, 70, 0.15);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      text-decoration: none;
       animation: resumePulse 2s infinite ease-in-out;
     }
 
@@ -1464,15 +1476,45 @@
       color: var(--red);
     }
 
-    .resume-float .resume-icon {
-      font-size: 1.15rem;
+    .leetcode-float {
+      border: 1px solid #FFA116;
+      color: #FFA116;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(255, 161, 22, 0.2);
+      animation: leetcodePulse 2s infinite ease-in-out 1s;
+    }
+
+    .leetcode-float:hover {
+      transform: translateY(-4px) scale(1.1);
+      border-color: #ffffff;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 161, 22, 0.45);
+      color: #FFA116;
+    }
+
+    .resume-float .resume-icon,
+    .leetcode-float .leetcode-icon {
       display: flex;
       align-items: center;
       justify-content: center;
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .resume-float:hover .resume-icon {
+    .resume-float .resume-icon {
+      font-size: 1.15rem;
+    }
+
+    .leetcode-float .leetcode-icon {
+      width: 22px;
+      height: 22px;
+    }
+
+    .leetcode-float .leetcode-icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .resume-float:hover .resume-icon,
+    .leetcode-float:hover .leetcode-icon {
       transform: rotate(15deg) scale(1.2);
     }
 
@@ -1488,10 +1530,27 @@
       }
     }
 
+    @keyframes leetcodePulse {
+
+      0%,
+      100% {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(255, 161, 22, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 28px rgba(255, 161, 22, 0.5);
+      }
+    }
+
     @media(max-width:900px) {
-      .resume-float {
+      .floating-actions {
         top: 20px;
         right: 20px;
+        gap: 10px;
+      }
+
+      .resume-float,
+      .leetcode-float {
         width: 44px;
         height: 44px;
         padding: 0;
@@ -1499,6 +1558,11 @@
 
       .resume-float .resume-icon {
         font-size: 1rem;
+      }
+
+      .leetcode-float .leetcode-icon {
+        width: 18px;
+        height: 18px;
       }
     }
 
@@ -1649,59 +1713,37 @@
         <a class="view-all" href="#" target="_self">View All Projects →</a>
       </div>
       <div class="proj-grid">
-        <!-- Project 01: CortexAI -->
-        <a href="https://github.com/syedaftab-dev/CortexAI" target="_blank" class="proj-card reveal">
+        <!-- Project 01: Tessera RAG -->
+        <a href="https://github.com/syedaftab-dev/tessera-rag" target="_blank" class="proj-card reveal">
           <div class="glow"></div>
           <div class="tag">01</div>
           <div class="arrow">↗</div>
           <div class="body">
             <div class="num">01</div>
             <div class="status-badge WIP"><span class="pulse-dot"></span> In Development</div>
-            <h3>CortexAI</h3>
-            <div class="sub">Multi-Agent AI Platform</div>
-            <p class="proj-desc">Multi-agent AI platform orchestrating autonomous workflows. Built with a MERN stack and
-              Redis session/cache management, integrated LangChain and LangGraph for dynamic RAG, and deployed on AWS.
+            <h3>Tessera RAG</h3>
+            <div class="sub">Advanced RAG System</div>
+            <p class="proj-desc">A production grade, enterprise level RAG system built with LangGraph, Portkey LLM Gateway, and Gemini Embeddings. The system distinguishes between technical "True Data" and random "Noisy Data" using semantic re-ranking, history-aware planning, and NeMo Guardrails for input/output safety.
             </p>
             <div class="proj-tech">
-              <span class="tech-badge">MERN</span>
-              <span class="tech-badge">AWS</span>
-              <span class="tech-badge">Redis</span>
               <span class="tech-badge">RAG</span>
+              <span class="tech-badge">Quadrails</span>
+              <span class="tech-badge">langfuse</span>
               <span class="tech-badge">LangChain</span>
               <span class="tech-badge">LangGraph</span>
-              <span class="tech-badge">Microservices</span>
+              <span class="tech-badge">Docker</span>
+              <span class="tech-badge">Kubernetes</span>
             </div>
           </div>
         </a>
 
-        <!-- Project 02: Threadly -->
-        <a href="https://github.com/syedaftab-dev/Threadly" target="_blank" class="proj-card reveal">
+        <!-- Project 02: Sportz -->
+        <a href="https://github.com/syedaftab-dev/sports_websockets" target="_blank" class="proj-card reveal">
           <div class="glow"></div>
           <div class="tag">02</div>
           <div class="arrow">↗</div>
           <div class="body">
             <div class="num">02</div>
-            <h3>Threadly</h3>
-            <div class="sub">Full Stack Social Feed Platform</div>
-            <p class="proj-desc">Serverless social feed platform with algorithmic sorting. Achieved near-zero cold
-              starts via Next.js 16 App Router and RSC. Shifted 80% data-fetching to server actions.</p>
-            <div class="proj-tech">
-              <span class="tech-badge">Next.js 16</span>
-              <span class="tech-badge">React 19</span>
-              <span class="tech-badge">TypeScript</span>
-              <span class="tech-badge">Prisma</span>
-              <span class="tech-badge">PostgreSQL</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Project 03: Sportz -->
-        <a href="https://github.com/syedaftab-dev/sports_websockets" target="_blank" class="proj-card reveal">
-          <div class="glow"></div>
-          <div class="tag">03</div>
-          <div class="arrow">↗</div>
-          <div class="body">
-            <div class="num">03</div>
             <h3>Sportz</h3>
             <div class="sub">Real Time Sports Dashboard</div>
             <p class="proj-desc">Real time sports analytics platform with sub-second latency via WebSockets. Integrated
@@ -1717,13 +1759,13 @@
           </div>
         </a>
 
-        <!-- Project 04: CredX -->
-        <a href="https://github.com/syedaftab-dev/credex" target="_blank" class="proj-card reveal hidden-card">
+        <!-- Project 03: CredX -->
+        <a href="https://github.com/syedaftab-dev/credex" target="_blank" class="proj-card reveal">
           <div class="glow"></div>
-          <div class="tag">04</div>
+          <div class="tag">03</div>
           <div class="arrow">↗</div>
           <div class="body">
-            <div class="num">04</div>
+            <div class="num">03</div>
             <h3>CredX</h3>
             <div class="sub">AI SaaS Spending Analytics</div>
             <p class="proj-desc">SaaS spend auditing engine with Next.js App Router. AI-driven recommendations across
@@ -1738,13 +1780,56 @@
           </div>
         </a>
 
-        <!-- Project 05: AftaMeet (Hidden initially) -->
-        <a href="https://github.com/syedaftab-dev/streamify" target="_blank" class="proj-card reveal hidden-card">
+        <!-- Project 04: SkinHealth AI (Hidden initially) -->
+        <a href="https://github.com/syedaftab-dev/Skin-health-AI" target="_blank" class="proj-card reveal hidden-card">
+          <div class="glow"></div>
+          <div class="tag">04</div>
+          <div class="arrow">↗</div>
+          <div class="body">
+            <div class="num">04</div>
+            <h3>SkinHealth AI</h3>
+            <div class="sub">AI Skin Diagnosis & Clinic Portal</div>
+            <p class="proj-desc">Deep learning skin lesion classification platform. Built with PyTorch (timm) and
+              FastAPI for real time diagnosis. Features client, doctor, and admin portals with a React frontend.</p>
+            <div class="proj-tech">
+              <span class="tech-badge">React 19</span>
+              <span class="tech-badge">FastAPI</span>
+              <span class="tech-badge">PyTorch</span>
+              <span class="tech-badge">MongoDB</span>
+              <span class="tech-badge">Tailwind CSS</span>
+              <span class="tech-badge">REST API</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Project 05: Threadly (Hidden initially) -->
+        <a href="https://github.com/syedaftab-dev/Threadly" target="_blank" class="proj-card reveal hidden-card">
           <div class="glow"></div>
           <div class="tag">05</div>
           <div class="arrow">↗</div>
           <div class="body">
             <div class="num">05</div>
+            <h3>Threadly</h3>
+            <div class="sub">Full Stack Social Feed Platform</div>
+            <p class="proj-desc">Serverless social feed platform with algorithmic sorting. Achieved near-zero cold
+              starts via Next.js 16 App Router and RSC. Shifted 80% data-fetching to server actions.</p>
+            <div class="proj-tech">
+              <span class="tech-badge">Next.js 16</span>
+              <span class="tech-badge">React 19</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">Prisma</span>
+              <span class="tech-badge">PostgreSQL</span>
+            </div>
+          </div>
+        </a>
+        
+        <!-- Project 06: AftaMeet (Hidden initially) -->
+        <a href="https://github.com/syedaftab-dev/streamify" target="_blank" class="proj-card reveal hidden-card">
+          <div class="glow"></div>
+          <div class="tag">06</div>
+          <div class="arrow">↗</div>
+          <div class="body">
+            <div class="num">06</div>
             <h3>AftaMeet</h3>
             <div class="sub">Full Stack Video Conferencing Platform</div>
             <p class="proj-desc">Modern real time communication platform. Features high-quality audio/video calls
@@ -1758,28 +1843,6 @@
               <span class="tech-badge">WebSockets</span>
               <span class="tech-badge">GetStream SDK</span>
               <span class="tech-badge">Tailwind CSS</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Project 06: SkinHealth AI (Hidden initially) -->
-        <a href="https://github.com/syedaftab-dev/Skin-health-AI" target="_blank" class="proj-card reveal hidden-card">
-          <div class="glow"></div>
-          <div class="tag">06</div>
-          <div class="arrow">↗</div>
-          <div class="body">
-            <div class="num">06</div>
-            <h3>SkinHealth AI</h3>
-            <div class="sub">AI Skin Diagnosis & Clinic Portal</div>
-            <p class="proj-desc">Deep learning skin lesion classification platform. Built with PyTorch (timm) and
-              FastAPI for real time diagnosis. Features client, doctor, and admin portals with a React frontend.</p>
-            <div class="proj-tech">
-              <span class="tech-badge">React 19</span>
-              <span class="tech-badge">FastAPI</span>
-              <span class="tech-badge">PyTorch</span>
-              <span class="tech-badge">MongoDB</span>
-              <span class="tech-badge">Tailwind CSS</span>
-              <span class="tech-badge">REST API</span>
             </div>
           </div>
         </a>
@@ -1885,7 +1948,13 @@
         </div>
         <div class="skills-row">
           <div class="skills-cat">AI / LLM</div>
-          <div class="skills-items">LANGCHAIN <span class="sep">/</span> LANGGRAPH <span class="sep">/</span> RAG</div>
+          <div class="skills-items">LANGGRAPH <span class="sep">/</span> LANGCHAIN <span class="sep">/</span> RAG <span
+              class="sep">/</span> GUARDRAILS</div>
+        </div>
+        <div class="skills-row">
+          <div class="skills-cat">LLMOPS</div>
+          <div class="skills-items">LANGSMITH <span class="sep">/</span> LITELLM <span class="sep">/</span> RAG EVALUATION <span
+              class="sep">/</span> LANGFUSE</div>
         </div>
         <div class="skills-row">
           <div class="skills-cat">LANGUAGES</div>
@@ -2052,11 +2121,22 @@
     }
   </script>
 
-  <!-- FLOATING RESUME BUTTON -->
-  <a href="https://drive.google.com/file/d/1sDWxxnlz58ep-L0RopG6AxGR8lbn41q7/view?usp=drive_link" target="_blank"
-    class="resume-float" id="resumeFloatingBtn" title="Resume">
-    <span class="resume-icon">📄</span>
-  </a>
+  <!-- FLOATING ACTION BUTTONS -->
+  <div class="floating-actions">
+    <a href="https://drive.google.com/file/d/1sDWxxnlz58ep-L0RopG6AxGR8lbn41q7/view?usp=drive_link" target="_blank"
+      class="resume-float" id="resumeFloatingBtn" title="Resume">
+      <span class="resume-icon">📄</span>
+    </a>
+    <a href="https://leetcode.com/u/Syed-Aftab/" target="_blank"
+      class="leetcode-float" id="leetcodeFloatingBtn" title="LeetCode Profile">
+      <span class="leetcode-icon">
+        <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+          <title>LeetCode</title>
+          <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.381H20.79a1.38 1.38 0 0 0 1.38-1.381 1.38 1.38 0 0 0-1.38-1.382z"/>
+        </svg>
+      </span>
+    </a>
+  </div>
 
 </body>
 
